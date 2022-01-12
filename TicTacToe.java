@@ -17,23 +17,21 @@ Oct 30 2021 - created
 */
 
 
-public class TicTacToe
-{
-    public static void main (String [] args)
-    {
-    	UserInterface anInterface = new UserInterface();
-    	char type = anInterface.start();
-        if (type == 'r')
-        {
-        	Biosphere regular = new Biosphere(FileInitialization.read());
-        	regular.runTurn();
-        }
+public class TicTacToe{
+    public static void main (String [] args){
 
-        if (type == 'p')
-        {
-        	ProsperousBiosphere prosperous = new ProsperousBiosphere(FileInitialization.read());
-        	prosperous.runTurn();
-        }
+    	System.out.println("///////////////////////////////////////////////////////////////");
+        System.out.println("/                                                             /");
+        System.out.println("/   #####  #   ###     #####   #    ###     #####  ##  ####   /");
+        System.out.println("/     #    #  #          #    # #  #          #   #  # #      /");
+        System.out.println("/     #    #  #    ###   #   #   # #    ###   #   #  # ###    /");
+        System.out.println("/     #    #  #          #   ##### #          #   #  # #      /");
+        System.out.println("/     #    #   ###       #   #   #  ###       #    ##  ####   /");
+        System.out.println("/                                                             /");
+        System.out.println("///////////////////////////////////////////////////////////////");
+
+        World aWorld = new World();
+    	aWorld.runTurn();
         
     }
 }

@@ -21,3 +21,5 @@ Starting script is TicTacToe
 
 GameStatus has debugg mode, can toggle at any input with d
 Location if needed as a wrapper class for locations
+
+This is a test, ooooo

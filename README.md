@@ -1,11 +1,11 @@
-#Tic-Tac-Toe in Java
-##Ryan Smit [rbsmit82](https://github.com/rbsmit82)
-!(cli.jpg)
+# Tic-Tac-Toe in Java
+## Ryan Smit [rbsmit82](https://github.com/rbsmit82)
+![](cli.jpg)
 
 This is a simple version of Tic-Tac-Toe played in a command-line interface.
 It has one human player (you) and one "AI".
 
-##Description
+## Description
 The starting script is `TicTacToe.java`
 1. It creates a `World` 
     - Initializes the "board"
@@ -23,17 +23,17 @@ The starting script is `TicTacToe.java`
         - If someone has three symbols in a line, they win!
         - Or else, if no more moves can be made, the game ends in a stalemate
 
-##Install/Execution
+## Install/Execution
 Java JDK required to run.
 Works with Java 17.0.4.1 (older or new versions untested, but most likely okay).
 Download all files to the same directory.
 Compile the files by typing `javac *.java` in the command line.
 Execute the game by typing `java TicTacToe`.
 
-##Help
+## Help
 The game does have a "debugging mode" that can be accessed by typing 'd' at any point when input is required.
 (Although not all functions currently display debugging information)
 All possible moves have not been bug tested against the hard coded AI.
 
-##Versions
+## Versions
 1.0 Public release Apr 23 2023

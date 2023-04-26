@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 /*
 Ryan Smit
@@ -7,7 +8,7 @@ a Class designed to display the menu, asking where the user wants to put their s
 checks that input is is valid type and number
 
 Oct 30 2021 - created
-Mar 19 2022 - comments and debug mode displays
+Mar 19 2022 - comments and some debug mode displays, not debugged
 */
 
 
@@ -15,9 +16,11 @@ public class UserInterface{
 
     private boolean done;                                   // done = true if a correct input is received
     private final int FIRST = 0;
+    private Scanner in;
 
     public UserInterface(){
     	done = false;
+        in = new Scanner(System.in);
     }
 
     /* for player to choose symbol
@@ -27,10 +30,8 @@ public class UserInterface{
         done = false;
         char selection = ' ';
         char type = ' ';
-	    Scanner in = new Scanner(System.in);
         String line;
 	    
-
     	while (done == false)
     	{
     		System.out.println("Choose to play 'X' or 'O': ");
@@ -38,7 +39,6 @@ public class UserInterface{
     		selection = line.charAt(FIRST);
     		type = processChoice(selection);
     	}
-    	in.close();
 		return(type);
     }
 
@@ -86,7 +86,6 @@ public class UserInterface{
         done = false;
         char selection = ' ';
         char type = ' ';
-	    Scanner in = new Scanner(System.in);
         String line;
 
     	while (done == false)
@@ -96,11 +95,9 @@ public class UserInterface{
     		selection = line.charAt(FIRST);
     		type = processMenu(selection);
     	}
-    	in.close();
         if (GameStatus.debugModeOn == true){
             System.out.format("player chose %c\n", type);
         }
-
 		return(type);
     }
 
@@ -182,18 +179,15 @@ public class UserInterface{
         char selection = ' ';
         int coin = -1;
         done = false;
-	    Scanner in = new Scanner(System.in);
         String line;
 
         System.out.println("Flip a coin to see who goes first");
-    	while (done == false)
-    	{
+    	while (done == false){
     		System.out.println("Choose (h)eads or (t)ails: ");
-    		line = in.nextLine();
+            line = in.nextLine();
     		selection = line.charAt(FIRST);
     		coin = processFlip(selection);
-    	}
-    	in.close();
+            }
         if (GameStatus.debugModeOn == true){
             System.out.format("player chose %d\n", coin);
         }
@@ -238,4 +232,12 @@ public class UserInterface{
 		}
 		return(coin);
     }
+
+    /*
+     * "setter" for the Scanner
+     */
+    public void closeScanner(){
+        in.close();
+    }
+    
 }

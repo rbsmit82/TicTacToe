@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.Random;
 /*
 Ryan Smit
@@ -6,7 +5,7 @@ Ryan Smit
 
 
 Oct 30 2021 - created
-Mar 19 2022 - comments and
+Mar 19 2022 - comments and AI turn, not debugged
 */
 
 
@@ -29,7 +28,7 @@ public class World{
         int count = 1;
         for (int r = 0; r < ROWS; r++){
             for (int c = 0; c < COLUMNS; c++){
-                current[r][c] = (char)count;
+                current[r][c] = (char)(count + '0');;
                 count ++;
             }
         }
@@ -98,7 +97,7 @@ public class World{
             }
         }
         else { // AI goes first
-            System.out.format("Coin flip was %c...\n", coinFlipped);
+            System.out.format("Coin flip was %c, I go first!\n", coinFlipped);
             display();
             while (true){
                 computerTurn();
@@ -135,57 +134,58 @@ public class World{
             else
                 System.out.println("You lost...");
         }     
+        anInterface.closeScanner();
     }
 
     /* checks if player's choice is an empty square
     ** returns true if empty
     ** assumes default square numbers means empty
     */
-    public boolean checkEmpty(int position){
+    public boolean checkEmpty(char position){
         boolean result = false;
 
         switch(position){
-			case 1:
+			case '1':
                 if (current[0][0] == '1')
                     result = true;
 				break;
 
-            case 2:
+            case '2':
                 if (current[0][1] == '2')
                     result = true;
 				break;
 
-            case 3:
+            case '3':
                 if (current[0][2] == '3')
                     result = true;
 				break;
 
-            case 4:
+            case '4':
                 if (current[1][0] == '4')
                     result = true;
 				break;
 
-            case 5:
+            case '5':
                 if (current[1][1] == '5')
                     result = true;
 				break;
 
-            case 6:
+            case '6':
                 if (current[1][2] == '6')
                     result = true;
 				break;
 
-            case 7:
+            case '7':
                 if (current[2][0] == '7')
                     result = true;
 				break;
 
-            case 8:
+            case '8':
                 if (current[2][1] == '8')
                     result = true;
 				break;
 
-            case 9:
+            case '9':
                 if (current[2][2] == '9')
                     result = true;
 				break;
@@ -291,74 +291,74 @@ public class World{
                 placeSymbol(computerPlayer, close);
             }
             else { //choose a spot
-                if (checkEmpty(5)){ //middle is empty
+                if (checkEmpty('5')){ //middle is empty
                     placeSymbol(computerPlayer, '5');
                     close = '5';
                 }    
                 else if (checkSymbol(5)){ //computer has middle
-                    if (checkEmpty(1)){ 
+                    if (checkEmpty('1')){ 
                         placeSymbol(computerPlayer, '1');
                         close = '1';
                     } 
-                    else if (checkEmpty(3)){ 
+                    else if (checkEmpty('3')){ 
                         placeSymbol(computerPlayer, '3');
                         close = '3';
                     } 
-                    else if (checkEmpty(7)){ 
+                    else if (checkEmpty('7')){ 
                         placeSymbol(computerPlayer, '7');
                         close = '7';
                     } 
-                    else if (checkEmpty(9)){ 
+                    else if (checkEmpty('9')){ 
                         placeSymbol(computerPlayer, '9');
                         close = '9';
                     } 
-                    else if (checkEmpty(2)){
+                    else if (checkEmpty('2')){
                         placeSymbol(computerPlayer, '2');
                         close = '2';
                     } 
-                    else if (checkEmpty(4)){ 
+                    else if (checkEmpty('4')){ 
                         placeSymbol(computerPlayer, '4');
                         close = '4';
                     } 
-                    else if (checkEmpty(6)){ 
+                    else if (checkEmpty('6')){ 
                         placeSymbol(computerPlayer, '6');
                         close = '6';
                     } 
-                    else if (checkEmpty(8)){ 
+                    else if (checkEmpty('8')){ 
                         placeSymbol(computerPlayer, '8');
                         close = '8';
                     } 
                 }
                 else {  //player has middle square
-                    if (checkEmpty(1)){ 
+                    if (checkEmpty('1')){ 
                         placeSymbol(computerPlayer, '1');
                         close = '1';
                     } 
-                    else if (checkEmpty(3)){ 
+                    else if (checkEmpty('3')){ 
                         placeSymbol(computerPlayer, '3');
                         close = '3';
                     } 
-                    else if (checkEmpty(7)){ 
+                    else if (checkEmpty('7')){ 
                         placeSymbol(computerPlayer, '7');
                         close = '7';
                     } 
-                    else if (checkEmpty(9)){ 
+                    else if (checkEmpty('9')){ 
                         placeSymbol(computerPlayer, '9');
                         close = '9';
                     } 
-                    else if (checkEmpty(2)){
+                    else if (checkEmpty('2')){
                         placeSymbol(computerPlayer, '2');
                         close = '2';
                     } 
-                    else if (checkEmpty(4)){ 
+                    else if (checkEmpty('4')){ 
                         placeSymbol(computerPlayer, '4');
                         close = '4';
                     } 
-                    else if (checkEmpty(6)){ 
+                    else if (checkEmpty('6')){ 
                         placeSymbol(computerPlayer, '6');
                         close = '6';
                     } 
-                    else if (checkEmpty(8)){ 
+                    else if (checkEmpty('8')){ 
                         placeSymbol(computerPlayer, '8');
                         close = '8';
                     } 
@@ -432,69 +432,70 @@ public class World{
 
     /* checks if someone (parameter) close to winning
     ** returns the (first found) empty space needed to win/block
+    ** or '0' if not close
     */
     public char checkIfClose(char testChar){                                       // debug mode
         char next = '0'; 
         if (current[0][0] == testChar){
-            if (current[0][1] == testChar)
+            if (current[0][1] == testChar && checkEmpty('3'))
                 return next = '3';
-            if (current[0][2] == testChar)
+            if (current[0][2] == testChar && checkEmpty('2'))
                 return next = '2';
-            if (current[1][0] == testChar)
+            if (current[1][0] == testChar && checkEmpty('7'))
                 return next = '7';
-            if (current[1][1] == testChar)
+            if (current[1][1] == testChar && checkEmpty('9'))
                 return next = '9';
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('4'))
                 return next = '4';
-            if (current[2][2] == testChar)
+            if (current[2][2] == testChar && checkEmpty('5'))
                 return next = '5';
         }
         if (current[0][1] == testChar){
-            if (current[0][2] == testChar)
+            if (current[0][2] == testChar && checkEmpty('1'))
                 return next = '1';
-            if (current[1][1] == testChar)
+            if (current[1][1] == testChar && checkEmpty('8'))
                 return next = '8';
-            if (current[2][1] == testChar)
+            if (current[2][1] == testChar && checkEmpty('3'))
                 return next = '5';
         }
         if (current[0][2] == testChar) {
-            if (current[1][1] == testChar)
+            if (current[1][1] == testChar && checkEmpty('7'))
                 return next = '7';
-            if (current[1][2] == testChar)
+            if (current[1][2] == testChar && checkEmpty('9'))
                 return next = '9';
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('5'))
                 return next = '5';
-            if (current[2][2] == testChar)
+            if (current[2][2] == testChar && checkEmpty('6'))
                 return next = '6';                
         }
         if (current[1][0] == testChar){
-            if (current[1][1] == testChar)
+            if (current[1][1] == testChar && checkEmpty('6'))
                 return next = '6';
-            if (current[1][2] == testChar)
+            if (current[1][2] == testChar && checkEmpty('5'))
                 return next = '5';
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('1'))
                 return next = '1';
         }
         if (current[1][1] == testChar){
-            if (current[1][2] == testChar)
+            if (current[1][2] == testChar && checkEmpty('4'))
                 return next = '4';
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('3'))
                 return next = '3';
-            if (current[2][1] == testChar)
+            if (current[2][1] == testChar && checkEmpty('2'))
                 return next = '2';
-            if (current[2][2] == testChar)
+            if (current[2][2] == testChar && checkEmpty('1'))
                 return next = '1';    
         }
         if (current[2][1] == testChar){
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('9'))
                 return next = '9';
-            if (current[2][2] == testChar)
+            if (current[2][2] == testChar && checkEmpty('7'))
                 return next = '7';
         }
         if (current[2][2] == testChar){
-            if (current[2][0] == testChar)
+            if (current[2][0] == testChar && checkEmpty('8'))
                 return next = '8';
-            if (current[1][2] == testChar)
+            if (current[1][2] == testChar && checkEmpty('3'))
                 return next = '3';
         }
         return next;

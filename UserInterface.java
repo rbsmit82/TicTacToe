@@ -1,4 +1,3 @@
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 /*
 Ryan Smit
@@ -9,6 +8,7 @@ checks that input is is valid type and number
 
 Oct 30 2021 - created
 Mar 19 2022 - comments and some debug mode displays, not debugged
+Apr 23 2023 - debugging
 */
 
 
@@ -239,5 +239,5 @@ public class UserInterface{
     public void closeScanner(){
         in.close();
     }
-    
+
 }
